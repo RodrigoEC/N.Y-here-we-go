@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { ListElements } from '../../components/ListElements';
 import { TabledInfo } from '../../components/TabledInfo';
+import { TotalCost } from '../../components/TotalCost';
 import { getDolar } from '../../services/dolar';
 import { getListDatabase } from '../../services/notion';
 import { Devider, InfoContainer, Wrapper, ListsContainer } from './style';
@@ -9,7 +10,8 @@ import { Devider, InfoContainer, Wrapper, ListsContainer } from './style';
 export const Info = () => {
     const [NYTaxes,] = useState(8.88);
     const [dolar, setDolar] = useState(0);
-    const [listElements, setListElements] = useState([]);
+    const [listElementsRaw, setListElementsRaw] = useState([]);
+    const [listElements, setListElements] = useState({});
 
     useEffect(() => {
         const getDolarData = async () => {
@@ -29,6 +31,7 @@ export const Info = () => {
                 }
             })
 
+            setListElementsRaw(listData.results);
             setListElements(listObject);
         }
 
@@ -48,13 +51,14 @@ export const Info = () => {
                 {
                     Object.keys(listElements).map((elementCategory) => {
                         return <ListElements
-                                key={elementCategory}
-                                title={elementCategory}
-                                elements={listElements[elementCategory]}
-                            />
+                            key={elementCategory}
+                            title={elementCategory}
+                            elements={listElements[elementCategory]}
+                        />
                     })
                 }
             </ListsContainer>
+            <TotalCost elements={listElementsRaw} />
         </Wrapper>
     )
 }

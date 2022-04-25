@@ -9,6 +9,8 @@ export const Wrapper = styled.div`
     flex-direction: column;
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    height: 100%;
 `;
 
 export const Devider = styled.div`
@@ -26,7 +28,7 @@ export const InfoContainer = styled.div`
 export const ListsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 3rem 4rem;
-    padding: 4rem 2rem;
+    gap: 2rem 4rem;
+    padding: 3rem 2rem;
+    margin: 0 auto;
 `;

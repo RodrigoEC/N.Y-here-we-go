@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListElement } from '../ListElement';
-import { Wrapper, Title } from './style';
+import { Wrapper, Title, InfoContainer, TitleContainer } from './style';
 
 export const ListElements = ({ title, elements }) => {
 
@@ -8,10 +8,12 @@ export const ListElements = ({ title, elements }) => {
     return (elements &&
         <Wrapper>
             <Title>{title}</Title>
-            {elements.map((element) => <ListElement
-                key={element.id}
-                element={element.properties}
-            />)}
+            <InfoContainer>
+                {elements.map((element) => <ListElement
+                    key={element.id}
+                    element={element.properties}
+                />)}
+            </InfoContainer>
         </Wrapper>
     )
 }

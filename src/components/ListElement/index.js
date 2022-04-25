@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checked } from '../icons/Checked';
-import { Wrapper, Description } from './style';
+import { Wrapper, Description, DescriptionContainer, Price } from './style';
 
 export const ListElement = ({ element }) => {
     const description = element['Compra'].title.length > 0 ?
@@ -13,7 +13,11 @@ export const ListElement = ({ element }) => {
     return (
         <Wrapper>
             <Checked checked={element.Check.checkbox} />
-            <Description checked={element.Check.checkbox}>{description} - <strong>{coinRepresentative}{formatedPrice}</strong></Description>
+            <DescriptionContainer>
+
+                <Description checked={element.Check.checkbox}>{description}</Description>
+                <Price checked={element.Check.checkbox}>{coinRepresentative}{formatedPrice}</Price>
+            </DescriptionContainer>
         </Wrapper>
     )
 }

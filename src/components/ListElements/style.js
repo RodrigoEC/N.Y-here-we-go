@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
     flex-direction: column;
     color: #505050;
     gap: 1rem;
+
+    @media (max-width: 550px) {
+        width: 100%;
+        align-items: center;
+    }
 `;
 
 export const Title = styled.p`
@@ -13,10 +18,34 @@ export const Title = styled.p`
     font-size: 24px;
     color: #550055;
     font-weight: bolder;
+
+
+    @media (max-width: 550px) {
+        &::before {
+            content: '~ ';
+        }
+        
+        &::after {
+            content: ' ~';
+        }
+    }
 `;
 
 export const Info = styled.span`
     letter-spacing: 2px;
     font-size: 32px;
     font-weight: bolder;
+`;
+
+export const InfoContainer = styled.span`
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    color: #505050;
+    gap: 1rem;
+
+    @media (max-width: 550px) {
+        width: 100%;
+        align-items: left;
+    }
 `;
