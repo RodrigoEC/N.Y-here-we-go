@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { ListElements } from '../../components/ListElements';
+import { ProgressBar } from '../../components/ProgressBar';
 import { TabledInfo } from '../../components/TabledInfo';
 import { TotalCost } from '../../components/TotalCost';
 import { getDolar } from '../../services/dolar';
@@ -14,6 +15,8 @@ export const Info = () => {
     const [listElementsRaw, setListElementsRaw] = useState([]);
     const [listElements, setListElements] = useState({});
     const [loading, setLoading] = useState(true);
+    const [finalPrice, setFinalPrice] = useState(0);
+    const [paidAmount, setPaidAmount] = useState(0);
 
     useEffect(() => {
         const getDolarData = async () => {
@@ -42,6 +45,38 @@ export const Info = () => {
         getDolarData();
     }, [])
 
+    useEffect(() => {
+        const finalPrice = listElementsRaw.reduce((final, element) => {
+            const elementPrice = element.properties['Preço'].number
+            if (!elementPrice) {
+                return final;
+            };
+
+            if (element.properties['Moeda'].select.name === 'Dolar') {
+                return (elementPrice * (100 + NYTaxes) / 100) * dolar + final;
+            }
+
+            return elementPrice + final;
+        }, 0);
+        setFinalPrice(finalPrice);
+
+        const paidAmout = listElementsRaw.reduce((final, element) => {
+            const elementPrice = element.properties['Preço'].number
+            if (!elementPrice || !element.properties['Check'].checkbox) {
+                return final;
+            };
+
+            if (element.properties['Moeda'].select.name === 'Dolar') {
+                return (elementPrice * (100 + NYTaxes) / 100) * dolar + final;
+            }
+
+            return elementPrice + final;
+        }, 0);
+        setPaidAmount(paidAmout);
+        
+
+    }, [listElementsRaw, setFinalPrice, NYTaxes, dolar])
+
     return (
         <Wrapper>
             <LogoMini />
@@ -54,6 +89,7 @@ export const Info = () => {
                 <Loading />
             ) : (
                 <>
+                    <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
                     <ListsContainer>
                         {
                             Object.keys(listElements).map((elementCategory) => {
@@ -66,9 +102,7 @@ export const Info = () => {
                         }
                     </ListsContainer>
                     <TotalCost
-                        taxes={NYTaxes}
-                        dolar={dolar}
-                        elements={listElementsRaw}
+                        finalPrice={finalPrice}
                     />
                 </>
             )}

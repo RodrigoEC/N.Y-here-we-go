@@ -14,7 +14,6 @@ export const ListElement = ({ element }) => {
         <Wrapper>
             <Checked checked={element.Check.checkbox} />
             <DescriptionContainer>
-
                 <Description checked={element.Check.checkbox}>{description}</Description>
                 <Price checked={element.Check.checkbox}>{coinRepresentative}{formatedPrice}</Price>
             </DescriptionContainer>
