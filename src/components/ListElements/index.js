@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListElement } from '../ListElement';
-import { Wrapper, Title, InfoContainer, TitleContainer } from './style';
+import { Wrapper, Title, InfoContainer } from './style';
 
 export const ListElements = ({ title, elements }) => {
 

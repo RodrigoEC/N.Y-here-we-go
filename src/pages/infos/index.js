@@ -58,7 +58,11 @@ export const Info = () => {
                     })
                 }
             </ListsContainer>
-            <TotalCost elements={listElementsRaw} />
+            <TotalCost
+                taxes={NYTaxes}
+                dolar={dolar}
+                elements={listElementsRaw}
+            />
         </Wrapper>
     )
 }
