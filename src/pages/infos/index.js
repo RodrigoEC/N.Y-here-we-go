@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { ListElements } from '../../components/ListElements';
 import { TabledInfo } from '../../components/TabledInfo';
@@ -12,6 +13,7 @@ export const Info = () => {
     const [dolar, setDolar] = useState(0);
     const [listElementsRaw, setListElementsRaw] = useState([]);
     const [listElements, setListElements] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const getDolarData = async () => {
@@ -33,6 +35,7 @@ export const Info = () => {
 
             setListElementsRaw(listData.results);
             setListElements(listObject);
+            setLoading(false);
         }
 
         getListData();
@@ -47,22 +50,28 @@ export const Info = () => {
                 <TabledInfo title='dolar hoje' info={dolar} />
                 <TabledInfo title='taxa N.Y' info={NYTaxes} />
             </InfoContainer>
-            <ListsContainer>
-                {
-                    Object.keys(listElements).map((elementCategory) => {
-                        return <ListElements
-                            key={elementCategory}
-                            title={elementCategory}
-                            elements={listElements[elementCategory]}
-                        />
-                    })
-                }
-            </ListsContainer>
-            <TotalCost
-                taxes={NYTaxes}
-                dolar={dolar}
-                elements={listElementsRaw}
-            />
+            {loading ? (
+                <Loading />
+            ) : (
+                <>
+                    <ListsContainer>
+                        {
+                            Object.keys(listElements).map((elementCategory) => {
+                                return <ListElements
+                                    key={elementCategory}
+                                    title={elementCategory}
+                                    elements={listElements[elementCategory]}
+                                />
+                            })
+                        }
+                    </ListsContainer>
+                    <TotalCost
+                        taxes={NYTaxes}
+                        dolar={dolar}
+                        elements={listElementsRaw}
+                    />
+                </>
+            )}
         </Wrapper>
     )
 }
