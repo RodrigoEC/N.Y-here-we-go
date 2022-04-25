@@ -7,6 +7,8 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    max-width: 800px;
+    margin: 0 auto;
 `;
 
 export const Devider = styled.div`
@@ -19,4 +21,12 @@ export const Devider = styled.div`
 export const InfoContainer = styled.div`
     display: flex;
     gap: 3rem;
+`;
+
+export const ListsContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem 4rem;
+    padding: 4rem 2rem;
 `;
