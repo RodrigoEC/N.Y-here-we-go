@@ -27,7 +27,7 @@ export const Container = styled.div`
 
 export const Progress = styled.div`
     width: ${({ porcentage }) => `${porcentage}%`};
-    border: 2px dashed #ffffff;
+    border: 2px solid #ffffff;
 `;
 
 export const ProgressNumber = styled.span`
