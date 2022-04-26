@@ -86,10 +86,8 @@ export const Info = () => {
         const password = localStorage.getItem('@NYHWG/pass');
         const passEnv = process.env.REACT_APP_PASS;
 
-        if (login && password && login === loginEnv && password === passEnv) {
-        navigate('/');
-        } else {
-        navigate('/login');
+        if (!login || !password || login !== loginEnv || password !== passEnv) {
+            navigate('/login');
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
