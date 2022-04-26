@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: left;
     flex-direction: column;
-    color: #505050;
     gap: 1rem;
 
     @media (max-width: 550px) {
@@ -16,7 +15,7 @@ export const Wrapper = styled.div`
 export const Title = styled.p`
     letter-spacing: 2px;
     font-size: 24px;
-    color: #550055;
+    color: ${({ theme }) => theme.purple};
     font-weight: bolder;
 
 

@@ -48,19 +48,21 @@ export const InputContainer = styled.div`
 `;
 
 export const Button = styled(antButton)`
-    background: linear-gradient(103.16deg, #DB0000 0.35%, #2F5CFF 94.15%);
+    background: linear-gradient(103.16deg, ${({ theme }) => theme.red} 0.35%, ${({ theme }) => theme.blue} 94.15%);
     border: none;
     padding: .75rem 2rem;
     border-radius: 8px;
     text-transform: uppercase;
-    color: white;
     font-weight: bold;
     cursor: pointer;
     height: fit-content;
 
+    span {
+        color: white !important;
+    }
+
     &:hover, &:focus {
-        color: white;
-        background: linear-gradient(103.16deg, #DB0000 0.45%, #2F5CFF 94.15%);
+        background: linear-gradient(103.16deg, ${({ theme }) => theme.red} 0.45%, ${({ theme }) => theme.blue} 94.15%);
         transition: 0.5s;
         transform: scale(1.01);
     }

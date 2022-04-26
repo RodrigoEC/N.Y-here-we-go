@@ -20,14 +20,14 @@ export const Container = styled.div`
     gap: .5rem;
     height: 1.25rem;
     border-radius: 100px;
-    background: linear-gradient(90.12deg, #DB0000 -22.25%, #2F5CFF 105.36%);
+    background: linear-gradient(90.12deg, ${({ theme }) => theme.red} -22.25%, ${({ theme }) => theme.blue} 105.36%);
     box-sizing: border-box;
     flex-grow: 1;
 `;
 
 export const Progress = styled.div`
     width: ${({ porcentage }) => `${porcentage}%`};
-    border: 2px solid #ffffff;
+    border: 2px solid ${({ theme }) => theme.primary};
 `;
 
 export const ProgressNumber = styled.span`

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Container } from './styles';
+import { useTheme } from '../../../context/theme';
 
 
-export const Loading = ({ colors }) => {
+export const Loading = () => {
+    const { theme } = useTheme();
+
     return (
         <Container>
             <svg width="130" height="66" viewBox="0 0 97 49" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,31 +15,24 @@ export const Loading = ({ colors }) => {
                 <rect className='third' x="91.2941" y="43.2727" width="5.70588" height="5.72727" fill="url(#paint3_linear_27_14)" />
                 <defs>
                     <linearGradient id="paint0_linear_27_14" x1="-12" y1="4.38622e-07" x2="83" y2="57" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#DB0000" />
-                        <stop offset="1" stopColor="#2F5CFF" />
+                        <stop stopColor={theme.red} />
+                        <stop offset="1" stopColor={theme.blue} />
                     </linearGradient>
                     <linearGradient id="paint1_linear_27_14" x1="66" y1="39.5" x2="78" y2="48.5" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#DB0000" />
-                        <stop offset="1" stopColor="#2F5CFF" />
+                        <stop stopColor={theme.red} />
+                        <stop offset="1" stopColor={theme.blue} />
                     </linearGradient>
                     <linearGradient id="paint2_linear_27_14" x1="73.5" y1="40" x2="87.5" y2="50" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#DB0000" />
-                        <stop offset="1" stopColor="#2F5CFF" />
+                        <stop stopColor={theme.red} />
+                        <stop offset="1" stopColor={theme.blue} />
                     </linearGradient>
                     <linearGradient id="paint3_linear_27_14" x1="83.5" y1="42.5" x2="94.1471" y2="49" gradientUnits="userSpaceOnUse">
-                        <stop stopColor="#DB0000" />
-                        <stop offset="1" stopColor="#2F5CFF" />
+                        <stop stopColor={theme.red} />
+                        <stop offset="1" stopColor={theme.blue} />
                     </linearGradient>
                 </defs>
             </svg>
         </Container>
 
     )
-}
-
-Loading.defaultProps = {
-    colors: {
-        first: "#DB0000",
-        second: "#2F5CFF",
-    }
 }

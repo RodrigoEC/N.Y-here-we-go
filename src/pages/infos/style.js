@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     margin: 0 auto;
     position: relative;
     height: 100%;
+    color: ${({ theme }) => theme.font};
 `;
 
 export const Devider = styled.div`
