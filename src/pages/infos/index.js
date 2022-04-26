@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { ListElements } from '../../components/ListElements';
@@ -17,6 +18,8 @@ export const Info = () => {
     const [loading, setLoading] = useState(true);
     const [finalPrice, setFinalPrice] = useState(0);
     const [paidAmount, setPaidAmount] = useState(0);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getDolarData = async () => {
@@ -76,6 +79,21 @@ export const Info = () => {
         
 
     }, [listElementsRaw, setFinalPrice, NYTaxes, dolar])
+
+    useEffect(() => {
+        const login = localStorage.getItem('@NYHWG/login');
+        const loginEnv = process.env.REACT_APP_LOGIN;
+        const password = localStorage.getItem('@NYHWG/pass');
+        const passEnv = process.env.REACT_APP_PASS;
+
+        if (login && password && login === loginEnv && password === passEnv) {
+        navigate('/');
+        } else {
+        navigate('/login');
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location]);
 
     return (
         <Wrapper>
