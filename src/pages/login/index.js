@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LogoBig } from '../../components/icons/LogoBig';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Wrapper, Button, LoginInput, PassInput, InputContainer } from './style';
+import { Contribute } from '../../components/Contribute';
 
 export const Login = () => {
     const [loginState, setLoginState] = useState('');
@@ -43,6 +44,7 @@ export const Login = () => {
                 <PassInput placeholder='*****' onChange={(e) => setPassState(e.target.value)} />
             </InputContainer>
             <Button onClick={onFinish} >Entrar</Button>
+            <Contribute />
         </Wrapper>
     )
 }
