@@ -1,11 +1,17 @@
 import React from 'react';
-import { Wrapper, TotalValue, Subtitle } from './style';
+import { Notion } from '../icons/Notion';
+import { Wrapper, TotalValue, Subtitle, SubtitleContainer } from './style';
 
 export const TotalCost = ({ finalPrice }) => {
 
     return (
         <Wrapper>
-            <Subtitle>Valor total em real</Subtitle>
+            <SubtitleContainer>
+                <Subtitle>Valor total em real</Subtitle>
+                <a href={process.env.REACT_APP_NOTION_PAGE} target='_blank' rel='noreferrer'>
+                    <Notion />
+                </a>
+            </SubtitleContainer>
             <TotalValue>R${finalPrice.toFixed(2)}</TotalValue>
         </Wrapper>
     )

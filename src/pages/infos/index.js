@@ -7,13 +7,11 @@ import { ListElements } from '../../components/ListElements';
 import { ProgressBar } from '../../components/ProgressBar';
 import { TabledInfo } from '../../components/TabledInfo';
 import { TotalCost } from '../../components/TotalCost';
-import { useTheme } from '../../context/theme';
 import { getDolar } from '../../services/dolar';
 import { getListDatabase } from '../../services/notion';
 import { Devider, InfoContainer, Wrapper, ListsContainer } from './style';
 
 export const Info = () => {
-    const { handleSwitch } = useTheme();
     const [NYTaxes,] = useState(8.88);
     const [dolar, setDolar] = useState(0);
     const [listElementsRaw, setListElementsRaw] = useState([]);

@@ -25,3 +25,9 @@ export const TotalValue = styled.span`
     -webkit-text-fill-color: transparent;
     background-clip: text;
 `;
+
+export const SubtitleContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+`;
