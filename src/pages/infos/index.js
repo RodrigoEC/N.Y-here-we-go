@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Contribute } from '../../components/Contribute';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { ListElements } from '../../components/ListElements';
@@ -122,6 +123,7 @@ export const Info = () => {
                     />
                 </>
             )}
+            <Contribute />
         </Wrapper>
     )
 }
