@@ -40,12 +40,20 @@ export const PassInput = styled(Input.Password)`
     svg {
         fill: ${({ theme }) => theme.secondary};
     }
+
+    &:-webkit-autofill, &:autofill {
+        background: ${({ theme }) => theme.primary};
+    }
 `;
 
 export const LoginInput = styled(Input)`
     width: 15rem;
     background: ${({ theme }) => theme.primary};
     color: ${({ theme }) => theme.secondary};
+
+    &:-webkit-autofill, &:autofill {
+        background: ${({ theme }) => theme.primary};
+    }
 `;
 
 export const InputContainer = styled.div`
