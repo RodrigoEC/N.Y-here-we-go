@@ -24,6 +24,10 @@ export const TotalValue = styled.span`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+
+    strong {
+        font-size: ${({ porcent }) => porcent > 50 ? `${porcent}%` : '50%'};
+    }
 `;
 
 export const SubtitleContainer = styled.div`

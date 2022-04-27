@@ -2,7 +2,8 @@ import React from 'react';
 import { Notion } from '../icons/Notion';
 import { Wrapper, TotalValue, Subtitle, SubtitleContainer } from './style';
 
-export const TotalCost = ({ finalPrice }) => {
+export const TotalCost = ({ finalPrice, paidAmount }) => {
+    const porcent = paidAmount / finalPrice * 100
 
     return (
         <Wrapper>
@@ -12,31 +13,13 @@ export const TotalCost = ({ finalPrice }) => {
                     <Notion />
                 </a>
             </SubtitleContainer>
-            <TotalValue>R${finalPrice.toFixed(2)}</TotalValue>
+            <TotalValue porcent={porcent} ><strong>R${paidAmount.toFixed(2)} /</strong> R${finalPrice.toFixed(2)}</TotalValue>
         </Wrapper>
     )
 }
 
 TotalCost.defaultProps = {
-    element: {
-        Compra: {
-            title: {
-                text: {
-                    content: 'missing title',
-                }
-            }
-        },
-        Moeda: {
-            select: {
-                name: 'Dolar',
-            }
-        },
-        Preço: {
-            number: 0,
-        },
-        Check: {
-            checkbox: false,
-        }
-    },
+    finalPrice: 1,
+    paidAmount: 1,
 }
 

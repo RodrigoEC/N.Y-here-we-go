@@ -32,7 +32,7 @@ export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements 
                         })
                     }
                 </ ListsContainer>
-                <TotalCost finalPrice={finalPrice} />
+                <TotalCost finalPrice={finalPrice} paidAmount={paidAmount} />
             </Wrapper>
         )
 }
