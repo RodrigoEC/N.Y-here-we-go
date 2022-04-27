@@ -48,8 +48,8 @@ export default function ThemesProvider({ children }) {
     const getTheme = () => {
         let theme = localStorage.getItem('@NYHWG/theme')
         if (!theme) {
-            localStorage.setItem('@NYHWG/theme', 'light')
-            theme = 'light'
+            localStorage.setItem('@NYHWG/theme', 'dark')
+            theme = 'dark'
         }
         return theme
     }
