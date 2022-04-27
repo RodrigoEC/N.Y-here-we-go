@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
 
     @media (max-width: 550px) {
         width: 100%;
-        align-items: center;
     }
 `;
 
@@ -17,17 +16,6 @@ export const Title = styled.p`
     font-size: 24px;
     color: ${({ theme }) => theme.purple};
     font-weight: bolder;
-
-
-    @media (max-width: 550px) {
-        &::before {
-            content: '~ ';
-        }
-        
-        &::after {
-            content: ' ~';
-        }
-    }
 `;
 
 export const Info = styled.span`

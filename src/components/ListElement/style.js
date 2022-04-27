@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const Description = styled.p`
     letter-spacing: 2px;
-    font-size: 16px;
+    font-size: 14px;
 
     strong {
         font-weight: ${({ checked }) => checked ? '' : 'bold'};;

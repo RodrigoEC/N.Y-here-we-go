@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 export const Devider = styled.div`
     width: 50px;
     height: 2px;
-    background: #505050;
+    background: ${({ theme }) => theme.secondary};
     margin: 2rem 0;
 `;
 
