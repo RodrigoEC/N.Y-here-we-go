@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# N.Y here we go! ✈️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What is, actually, why is this project?
 
-## Available Scripts
+Well, me and a friend are planning a posgraduate vacation to New York and we were creating pages on Notion so we could organize ourselves. I also always wanted to  do something with the Notion API, so I had the idea of creating a site using the Notion API as a CMS, a site where I can update my notion database and the site show how much will it cost in *Reais* to make our vacation. So, that's it, I hope you like it.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+- ReactJS;
+- Your workspace (owned by you) on Notion;
+- git.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to run it
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone this repository
 
-### `npm test`
+```
+git clone https://github.com/RodrigoEC/N.Y-here-we-go.git
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Enter the repository
 
-### `npm run build`
+```
+cd N.Y-here-we-go
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install the projects dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm i
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Copy .env.example
 
-### `npm run eject`
+```
+cp .env.example
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. ⚠️ Now we're going to fill the environmet variables needed
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **REACT_APP_LOGIN**: This is the login of your application (I implemented this level of security just to not let the application open to everyone so easily);
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **REACT_APP_PASS**: This is the password of your application;
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **REACT_APP_NOTION_API_KEY**: You'll need to generate a Key of your workspace to use the Notion API, [find out how to generate this key](https://daily-dev-tips.com/posts/getting-started-with-the-notion-api/).
 
-## Learn More
+- **REACT_APP_NOTION_DATABASE_ID**: You'll need to get the id for the database you want to show on the application, On the link below you can find out how to do that too.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **REACT_APP_PROXY_URL**: Unfortunately the Notion API still don't have CORS origin error handling, so they don't recommend using it for web applications, to make it work I had to use a proxy and because of that you'll need too.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **REACT_APP_NOTION_PAGE** (optional): The notion page where the database is set.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+🥳 It's finished! Now you can use it however you want 🥳
 
-### Analyzing the Bundle Size
+## Contribute with us
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+If you find some bug or want to suggest a new feature please open an issue and we can discusse and work on it. Thank you for reading 'till here, Bye.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+ 
