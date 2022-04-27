@@ -13,6 +13,8 @@ const colors = {
     lightBlue: '#93AAFF',
     purple: '#550055',
     darkPurple: '#AE90AE',
+    lightGrey: '#7E7E7E',
+    darkerWhite: '#D9D7D7',
 }
 
 const ThemeContext = createContext()
@@ -24,6 +26,7 @@ const themeLight= {
     blue: colors.blue,
     purple: colors.purple,
     font: colors.fontBlack,
+    reload: colors.lightGrey,
 }
 
 const themeDark = {
@@ -33,6 +36,7 @@ const themeDark = {
     blue: colors.lightBlue,
     font: colors.fontWhite,
     purple: colors.darkPurple,
+    reload: colors.darkerWhite,
 }
 
 const themes = {

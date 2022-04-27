@@ -3,35 +3,33 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Contribute } from '../../components/Contribute';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
-import { ListElements } from '../../components/ListElements';
-import { ProgressBar } from '../../components/ProgressBar';
+import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
-import { TotalCost } from '../../components/TotalCost';
 import { getDolar } from '../../services/dolar';
 import { getListDatabase } from '../../services/notion';
-import { Devider, InfoContainer, Wrapper, ListsContainer } from './style';
+import { Devider, InfoContainer, Wrapper } from './style';
 
 export const Info = () => {
     const [NYTaxes,] = useState(8.88);
     const [dolar, setDolar] = useState(0);
     const [listElementsRaw, setListElementsRaw] = useState([]);
     const [listElements, setListElements] = useState({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [finalPrice, setFinalPrice] = useState(0);
     const [paidAmount, setPaidAmount] = useState(0);
+    const [failed, setFailed] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
+    
+    const getListData = async () => {
+        setLoading(true);
+        const listData = await getListDatabase();
 
-    useEffect(() => {
-        const getDolarData = async () => {
-            const dolarJson = await getDolar();
-            setDolar(dolarJson.USDBRLT.ask);
-        }
-
-        const getListData = async () => {
-            const listData = await getListDatabase();
+        if (!listData) {
+            setFailed(true);
+        } else {
             const listObject = {};
-
+            
             listData.results.forEach((data) => {
                 if (data.properties['Categoria'].select && listObject[data.properties['Categoria'].select.name]) {
                     listObject[data.properties['Categoria'].select.name].push(data);
@@ -39,11 +37,19 @@ export const Info = () => {
                     listObject[data.properties['Categoria'].select.name] = [data];
                 }
             })
-
+            
             setListElementsRaw(listData.results);
             setListElements(listObject);
-            setLoading(false);
         }
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        const getDolarData = async () => {
+            const dolarJson = await getDolar();
+            setDolar(dolarJson.USDBRLT.ask);
+        }
+
 
         getListData();
         getDolarData();
@@ -105,23 +111,13 @@ export const Info = () => {
             {loading ? (
                 <Loading />
             ) : (
-                <>
-                    <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
-                    <ListsContainer>
-                        {
-                            Object.keys(listElements).map((elementCategory) => {
-                                return <ListElements
-                                    key={elementCategory}
-                                    title={elementCategory}
-                                    elements={listElements[elementCategory]}
-                                />
-                            })
-                        }
-                    </ListsContainer>
-                    <TotalCost
-                        finalPrice={finalPrice}
-                    />
-                </>
+                <NotionData 
+                    loadData={getListData}
+                    failed={failed}
+                    finalPrice={finalPrice}
+                    paidAmount={paidAmount}
+                    elements={listElements}
+                />
             )}
             <Contribute />
         </Wrapper>

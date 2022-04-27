@@ -12,9 +12,8 @@ export const getListDatabase = async (repeated) => {
         })
         return response;
     } catch (e) {
-        if (!repeated) {
-            console.log('Refazendo requisição...');
-            getListDatabase(true);
-        }
+        console.log('Erro ao recuperar infos...');
+        if (!repeated) getListDatabase(true);
+        return null;
     }
 }

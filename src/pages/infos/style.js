@@ -25,11 +25,3 @@ export const InfoContainer = styled.div`
     display: flex;
     gap: 3rem;
 `;
-
-export const ListsContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem 4rem;
-    padding: 3rem 2rem;
-    margin: 0 auto;
-`;
