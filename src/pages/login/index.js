@@ -31,19 +31,18 @@ export const Login = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
-
     return (
         <Wrapper>
             <LogoBig />
             <InputContainer>
                 <label>Login</label>
-                <LoginInput placeholder='Rodrigo' onChange={(e) => setLoginState(e.target.value)} />
+                <LoginInput placeholder='login' onChange={(e) => setLoginState(e.target.value)} />
             </InputContainer>
             <InputContainer>
                 <label>Senha</label>
-                <PassInput placeholder='*****' onChange={(e) => setPassState(e.target.value)} />
+                <PassInput onPressEnter={onFinish} placeholder='*****' onChange={(e) => setPassState(e.target.value)} />
             </InputContainer>
-            <Button onClick={onFinish} >Entrar</Button>
+            <Button onClick={onFinish} type='submit'>Entrar</Button>
             <Contribute />
         </Wrapper>
     )
