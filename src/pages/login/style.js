@@ -30,10 +30,22 @@ export const Wrapper = styled.div`
 
 export const PassInput = styled(Input.Password)`
     width: 15rem;
+    background: ${({ theme }) => theme.primary};
+
+    input {
+        background: ${({ theme }) => theme.primary};
+        color: ${({ theme }) => theme.secondary};
+    }
+
+    svg {
+        fill: ${({ theme }) => theme.secondary};
+    }
 `;
 
 export const LoginInput = styled(Input)`
     width: 15rem;
+    background: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.secondary};
 `;
 
 export const InputContainer = styled.div`

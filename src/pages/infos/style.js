@@ -25,3 +25,10 @@ export const InfoContainer = styled.div`
     display: flex;
     gap: 3rem;
 `;
+
+export const Logout = styled.span`
+    color: ${({ theme }) => theme.red};
+    margin-top: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+`;

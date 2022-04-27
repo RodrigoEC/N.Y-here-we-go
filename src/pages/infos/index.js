@@ -7,7 +7,7 @@ import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
 import { getDolar } from '../../services/dolar';
 import { getListDatabase } from '../../services/notion';
-import { Devider, InfoContainer, Wrapper } from './style';
+import { Devider, InfoContainer, Wrapper, Logout } from './style';
 
 export const Info = () => {
     const [NYTaxes,] = useState(8.88);
@@ -21,6 +21,12 @@ export const Info = () => {
     const location = useLocation();
     const navigate = useNavigate();
     
+    const handleLogout = () => {
+        localStorage.removeItem('@NYHWG/login');
+        localStorage.removeItem('@NYHWG/pass');
+        navigate('/login');
+    }
+
     const getListData = async () => {
         setLoading(true);
         const listData = await getListDatabase();
@@ -120,6 +126,7 @@ export const Info = () => {
                 />
             )}
             <Contribute />
+            <Logout onClick={handleLogout} >Sair</Logout>
         </Wrapper>
     )
 }
