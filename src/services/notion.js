@@ -2,10 +2,8 @@ import { Client } from "@notionhq/client";
 import axios from 'axios';
 
 export const notionAxios = axios.create({
-    baseURL: `${process.env.REACT_APP_PROXY_URL}/https://api.notion.com`,
+    baseURL: `${process.env.REACT_APP_PROXY_URL}/https://api.notion.com/v1`,
 });
-
-console.dir(notionAxios)
 
 const notion = new Client({
     auth: process.env.REACT_APP_NOTION_API_KEY,
@@ -29,14 +27,22 @@ export const updatePage = async (pageId, properties) => {
     try {
         const response = await notionAxios.patch(
             `/pages/${pageId}`,
-            properties,
+            {
+                "properties": properties,
+            },
             {
                 headers: {
-                    Authentication: `Bearer ${process.env.REACT_APP_NOTION_API_KEY}`,
-                    'Notion-Version': '2022-02-22',
+                    'Authorization': `Bearer secret_q6DGd4RgapfI9zAoHIqZy5foqcMch9itfDJsJFvg2m9`,
+                    'Notion-Version': '2021-08-16',
+                    'Content-Type': 'application/json',
                 }
             }
         );
+
+        // const response = await notion.pages.update({
+        //     page_id: pageId,
+        //     properties: properties,
+        // })
         return response;
     } catch (e) {
         console.log('Erro ao fazer o update da página de ID:', pageId);

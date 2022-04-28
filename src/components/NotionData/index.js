@@ -5,7 +5,7 @@ import { ListElements } from '../../components/ListElements';
 import { Reload } from '../icons/Reload';
 import { Wrapper, ListsContainer, FailedWrapper, Title } from './style';
 
-export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements }) => {
+export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements, handleCheckElement }) => {
 
     return failed ?
         (
@@ -25,6 +25,7 @@ export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements 
                     {
                         Object.keys(elements).map((elementCategory) => {
                             return <ListElements
+                                onCheck={handleCheckElement}
                                 key={elementCategory}
                                 title={elementCategory}
                                 elements={elements[elementCategory]}

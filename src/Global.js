@@ -26,7 +26,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 	font-family: 'Roboto', sans-serif !important;
     color: ${({ theme }) => theme.secondary};
-	transition: 0.3s;
+	transition: 0.3s background, fill;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 

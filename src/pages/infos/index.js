@@ -6,7 +6,7 @@ import { LogoMini } from '../../components/icons/LogoMini';
 import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
 import { getDolar } from '../../services/dolar';
-import { createPage, getListDatabase, removePage } from '../../services/notion';
+import { createPage, getListDatabase, removePage, updatePage } from '../../services/notion';
 import { Devider, InfoContainer, Wrapper, Logout } from './style';
 
 export const Info = () => {
@@ -20,32 +20,38 @@ export const Info = () => {
     const [failed, setFailed] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     const handleLogout = () => {
         localStorage.removeItem('@NYHWG/login');
         localStorage.removeItem('@NYHWG/pass');
         navigate('/login');
     }
 
-    const getListData = async () => {
-        setLoading(true);
+    const formatElementsList = (listData) => {
+        const listObject = {};
+
+        listData.forEach((data) => {
+            if (data.properties['Categoria'].select && listObject[data.properties['Categoria'].select.name]) {
+                listObject[data.properties['Categoria'].select.name].push(data);
+            } else if (data.properties['Categoria'].select) {
+                listObject[data.properties['Categoria'].select.name] = [data];
+            }
+        })
+
+        setListElementsRaw(listData);
+        setListElements(listObject);
+    }
+
+    const getListData = async (notLoad) => {
+        if (!notLoad) {
+            setLoading(true);
+        }
         const listData = await getListDatabase();
 
         if (!listData) {
             setFailed(true);
         } else {
-            const listObject = {};
-            
-            listData.results.forEach((data) => {
-                if (data.properties['Categoria'].select && listObject[data.properties['Categoria'].select.name]) {
-                    listObject[data.properties['Categoria'].select.name].push(data);
-                } else if (data.properties['Categoria'].select) {
-                    listObject[data.properties['Categoria'].select.name] = [data];
-                }
-            })
-            console.log(listData)
-            setListElementsRaw(listData.results);
-            setListElements(listObject);
+            formatElementsList(listData.results);
         }
         setLoading(false);
     }
@@ -56,9 +62,9 @@ export const Info = () => {
             setDolar(dolarJson.USDBRLT.ask);
         }
 
-
         getListData();
         getDolarData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -89,9 +95,9 @@ export const Info = () => {
             return elementPrice + final;
         }, 0);
         setPaidAmount(paidAmout);
-        
 
-    }, [listElementsRaw, setFinalPrice, NYTaxes, dolar])
+
+    }, [listElementsRaw, setFinalPrice, NYTaxes, dolar, listElements])
 
     useEffect(() => {
         const login = localStorage.getItem('@NYHWG/login');
@@ -108,12 +114,31 @@ export const Info = () => {
 
     const handleAddElement = async () => {
         setLoading(true);
-        console.log(listElementsRaw);
         const response = await removePage(listElementsRaw[0].id);
         if (response) {
             getListData();
         }
     }
+
+    const handleCheckElement = async (pageId, checkValue) => {
+        const backupElements = listElementsRaw;
+        const newListElements = listElementsRaw;
+
+        const element = listElementsRaw.find(element => element.id === pageId)
+        const elementIndex = listElementsRaw.indexOf(element);
+
+        newListElements[elementIndex].properties.Check.checkbox = !element.properties.Check.checkbox
+        formatElementsList(newListElements);
+
+        const response = updatePage(pageId, { 'Check': { checkbox: checkValue } });
+        response.then((response) =>
+            response.status === 200 ?
+                getListData(true) :
+                formatElementsList(backupElements)
+
+        );
+
+    };
 
     return (
         <Wrapper>
@@ -121,18 +146,19 @@ export const Info = () => {
             <Devider />
             <p onClick={handleAddElement}>CUUUUUUUU</p>
             <InfoContainer>
-                <TabledInfo title='dolar hoje' info={dolar}/>
+                <TabledInfo title='dolar hoje' info={dolar} />
                 <TabledInfo title='taxa N.Y' info={NYTaxes} />
             </InfoContainer>
             {loading ? (
                 <Loading />
             ) : (
-                <NotionData 
+                <NotionData
                     loadData={getListData}
                     failed={failed}
                     finalPrice={finalPrice}
                     paidAmount={paidAmount}
                     elements={listElements}
+                    handleCheckElement={handleCheckElement}
                 />
             )}
             <Contribute />

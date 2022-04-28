@@ -23,11 +23,13 @@ export const Container = styled.div`
     background: linear-gradient(90.12deg, ${({ theme }) => theme.red} -22.25%, ${({ theme }) => theme.blue} 105.36%);
     box-sizing: border-box;
     flex-grow: 1;
+
 `;
 
 export const Progress = styled.div`
     width: ${({ porcentage }) => `${porcentage}%`};
     border: 2px solid ${({ theme }) => theme.primary};
+    transition: 0.3s;
 `;
 
 export const ProgressNumber = styled.span`

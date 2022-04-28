@@ -9,6 +9,6 @@ export const getDolar = async () => {
         const response = await dolar.get('/USDT');
         return response.data;
     } catch (e) {
-        console.log(e);
+        console.log('Deu erro no dolar');
     }
 }
