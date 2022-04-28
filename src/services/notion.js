@@ -39,6 +39,9 @@ export const updatePage = async (pageId, properties) => {
             }
         );
 
+        response.status = 400;
+        console.log(response)
+
         // const response = await notion.pages.update({
         //     page_id: pageId,
         //     properties: properties,

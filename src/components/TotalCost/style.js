@@ -24,6 +24,7 @@ export const TotalValue = styled.span`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-align: center;
 
     strong {
         font-size: ${({ porcent }) => porcent > 50 ? `${porcent}%` : '50%'};

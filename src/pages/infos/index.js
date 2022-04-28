@@ -64,7 +64,7 @@ export const Info = () => {
 
         getListData();
         getDolarData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -113,23 +113,17 @@ export const Info = () => {
     }, [location]);
 
     const handleCheckElement = async (pageId, checkValue) => {
-        const backupElements = listElementsRaw;
-        const newListElements = listElementsRaw;
-
         const element = listElementsRaw.find(element => element.id === pageId)
         const elementIndex = listElementsRaw.indexOf(element);
 
-        newListElements[elementIndex].properties.Check.checkbox = !element.properties.Check.checkbox
-        formatElementsList(newListElements);
+        listElementsRaw[elementIndex].properties.Check.checkbox = !element.properties.Check.checkbox
+        formatElementsList(listElementsRaw);
 
         const response = updatePage(pageId, { 'Check': { checkbox: checkValue } });
         response.then((response) =>
-            response.status === 200 ?
-                getListData(true) :
-                formatElementsList(backupElements)
-
-        );
-
+            response.status !== 200 ?
+                console.log('deu ruim no update') :
+                '');
     };
 
     return (
