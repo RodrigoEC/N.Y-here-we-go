@@ -122,7 +122,7 @@ export const Info = () => {
 
         const response = updatePage(pageId, { 'Check': { checkbox: checkValue } });
         response.then((response) =>
-            response.status !== 200 ?
+            response ?
                 formatElementsList(oldListElement) :
                 '');
     };
