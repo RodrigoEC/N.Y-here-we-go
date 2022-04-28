@@ -112,14 +112,6 @@ export const Info = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
-    const handleAddElement = async () => {
-        setLoading(true);
-        const response = await removePage(listElementsRaw[0].id);
-        if (response) {
-            getListData();
-        }
-    }
-
     const handleCheckElement = async (pageId, checkValue) => {
         const backupElements = listElementsRaw;
         const newListElements = listElementsRaw;
@@ -144,7 +136,6 @@ export const Info = () => {
         <Wrapper>
             <LogoMini />
             <Devider />
-            <p onClick={handleAddElement}>CUUUUUUUU</p>
             <InfoContainer>
                 <TabledInfo title='dolar hoje' info={dolar} />
                 <TabledInfo title='taxa N.Y' info={NYTaxes} />
