@@ -6,7 +6,7 @@ import { LogoMini } from '../../components/icons/LogoMini';
 import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
 import { getDolar } from '../../services/dolar';
-import { getListDatabase } from '../../services/notion';
+import { createPage, getListDatabase, removePage } from '../../services/notion';
 import { Devider, InfoContainer, Wrapper, Logout } from './style';
 
 export const Info = () => {
@@ -43,7 +43,7 @@ export const Info = () => {
                     listObject[data.properties['Categoria'].select.name] = [data];
                 }
             })
-            
+            console.log(listData)
             setListElementsRaw(listData.results);
             setListElements(listObject);
         }
@@ -106,12 +106,22 @@ export const Info = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
+    const handleAddElement = async () => {
+        setLoading(true);
+        console.log(listElementsRaw);
+        const response = await removePage(listElementsRaw[0].id);
+        if (response) {
+            getListData();
+        }
+    }
+
     return (
         <Wrapper>
             <LogoMini />
             <Devider />
+            <p onClick={handleAddElement}>CUUUUUUUU</p>
             <InfoContainer>
-                <TabledInfo title='dolar hoje' info={dolar} />
+                <TabledInfo title='dolar hoje' info={dolar}/>
                 <TabledInfo title='taxa N.Y' info={NYTaxes} />
             </InfoContainer>
             {loading ? (

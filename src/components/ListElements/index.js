@@ -3,8 +3,6 @@ import { ListElement } from '../ListElement';
 import { Wrapper, Title, InfoContainer } from './style';
 
 export const ListElements = ({ title, elements }) => {
-
-
     return (elements &&
         <Wrapper>
             <Title>{title}</Title>
@@ -12,6 +10,7 @@ export const ListElements = ({ title, elements }) => {
                 {elements.map((element) => <ListElement
                     key={element.id}
                     element={element.properties}
+                    pageId={element.id}
                 />)}
             </InfoContainer>
         </Wrapper>

@@ -1,8 +1,9 @@
 import React from 'react';
+import { updatePage } from '../../services/notion';
 import { Checked } from '../icons/Checked';
 import { Wrapper, Description, DescriptionContainer, Price } from './style';
 
-export const ListElement = ({ element }) => {
+export const ListElement = ({ pageId, element }) => {
     const description = element['Compra'].title.length > 0 ?
         element['Compra'].title[0].text.content :
         'missing title';
@@ -10,9 +11,14 @@ export const ListElement = ({ element }) => {
     const coinRepresentative = element['Moeda'].select && element['Moeda'].select.name === 'Dolar' ? 'U$' : 'R$';
     const formatedPrice = (Math.round(element['Preço'].number * 100) / 100).toFixed(2);
 
+    const handleCheck = () => {
+        console.log('hum..')
+        updatePage(pageId, { 'Check': !element['Check'].checkbox})
+    }
+
     return (
         <Wrapper>
-            <Checked checked={element.Check.checkbox} />
+            <Checked checked={element.Check.checkbox} onClick={handleCheck}/>
             <DescriptionContainer>
                 <Description checked={element.Check.checkbox}>{description}</Description>
                 <Price checked={element.Check.checkbox}>{coinRepresentative}{formatedPrice}</Price>
