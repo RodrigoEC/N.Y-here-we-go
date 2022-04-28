@@ -113,6 +113,7 @@ export const Info = () => {
     }, [location]);
 
     const handleCheckElement = async (pageId, checkValue) => {
+        const oldListElement = { ...listElementsRaw };
         const element = listElementsRaw.find(element => element.id === pageId)
         const elementIndex = listElementsRaw.indexOf(element);
 
@@ -122,7 +123,7 @@ export const Info = () => {
         const response = updatePage(pageId, { 'Check': { checkbox: checkValue } });
         response.then((response) =>
             response.status !== 200 ?
-                console.log('deu ruim no update') :
+                formatElementsList(oldListElement) :
                 '');
     };
 
