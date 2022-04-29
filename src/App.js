@@ -7,16 +7,19 @@ import {
 import { Info } from './pages/infos';
 import { Login } from './pages/login';
 import 'antd/dist/antd.css'
+import ContentProvider from './context/elements';
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/' element={<Info />}></Route>
-        </Routes>
-      </Router>
+      <ContentProvider>
+        <Router>
+          <Routes>
+            <Route path='/login' element={<Login />}></Route>
+            <Route path='/' element={<Info />}></Route>
+          </Routes>
+        </Router>
+      </ContentProvider>
     </div>
   );
 }

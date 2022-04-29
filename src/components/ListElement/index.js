@@ -1,50 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useContent } from '../../context/elements';
+import { updatePage } from '../../services/notion';
 import { Checked } from '../icons/Checked';
 import { Wrapper, Description, DescriptionContainer, Price } from './style';
 
-export const ListElement = ({ pageId, element, onCheck }) => {
-    const description = element['Compra'].title.length > 0 ?
-        element['Compra'].title[0].text.content :
-        'missing title';
+export const ListElement = ({ element }) => {
+    const [checked, setChecked] = useState(element.properties['Check'].checkbox);
+    const { listElementsRaw, formatElementsList } = useContent();
+    
+    const title = element.properties['Compra'].title;
+    const description = title.length > 0 ? title[0].text.content : 'missing title';
 
-    const coinRepresentative = element['Moeda'].select && element['Moeda'].select.name === 'Dolar' ? 'U$' : 'R$';
-    const formatedPrice = (Math.round(element['Preço'].number * 100) / 100).toFixed(2);
+    const coinRepresentative = element.properties['Moeda'].select && element.properties['Moeda'].select.name === 'Dolar' ? 'U$' : 'R$';
+    const formatedPrice = (Math.round(element.properties['Preço'].number * 100) / 100).toFixed(2);
 
     const handleCheck = async () => {
-        await onCheck(pageId, !element['Check'].checkbox);
-    }
+        setChecked(previous => !previous);
+
+        const elementIndex = listElementsRaw.indexOf(element);
+        listElementsRaw[elementIndex].properties.Check.checkbox = !element.properties.Check.checkbox
+        formatElementsList(listElementsRaw);
+
+        const response = updatePage(element.id, { 'Check': { checkbox: element.properties.Check.checkbox } });
+        response.then((response) => (!response || response.status !== 200) && setChecked(previous => !previous));
+    };
 
     return (
         <Wrapper>
-            <Checked id='checkbox' checked={element.Check.checkbox} onClick={handleCheck}/>
+            <Checked id='checkbox' checked={checked} onClick={handleCheck}/>
             <DescriptionContainer>
-                <Description checked={element.Check.checkbox}>{description}</Description>
-                <Price checked={element.Check.checkbox}>{coinRepresentative}{formatedPrice}</Price>
+                <Description checked={checked}>{description}</Description>
+                <Price checked={checked}>{coinRepresentative}{formatedPrice}</Price>
             </DescriptionContainer>
         </Wrapper>
     )
-}
-
-ListElement.defaultProps = {
-    element: {
-        Compra: {
-            title: {
-                text: {
-                    content: 'missing title',
-                }
-            }
-        },
-        Moeda: {
-            select: {
-                name: 'Dolar',
-            }
-        },
-        Preço: {
-            number: 0,
-        },
-        Check: {
-            checkbox: false,
-        }
-    },
-}
-
+};

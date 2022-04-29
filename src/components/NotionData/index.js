@@ -6,7 +6,9 @@ import { Reload } from '../icons/Reload';
 import { Wrapper, ListsContainer, FailedWrapper, Title } from './style';
 import { Cross } from '../icons/Cross';
 
-export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements, handleCheckElement }) => {
+export const NotionData = ({ setActiveModal, loadData, failed, finalPrice, paidAmount, elements, handleCheckElement }) => {
+
+    const handleModal = () => setActiveModal(previous => !previous);
 
     return failed ?
         (
@@ -22,7 +24,9 @@ export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements,
         : (
             <Wrapper>
                 <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
-                <Cross id='add-cross'/>
+                <div onClick={handleModal}>
+                    <Cross id='add-cross' />
+                </div>
                 <ListsContainer>
                     {
                         Object.keys(elements).map((elementCategory) => {

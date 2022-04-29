@@ -8,10 +8,8 @@ export const ListElements = ({ title, elements, onCheck }) => {
             <Title>{title}</Title>
             <InfoContainer>
                 {elements.map((element) => <ListElement
-                    onCheck={onCheck}
                     key={element.id}
-                    element={element.properties}
-                    pageId={element.id}
+                    element={element}
                 />)}
             </InfoContainer>
         </Wrapper>

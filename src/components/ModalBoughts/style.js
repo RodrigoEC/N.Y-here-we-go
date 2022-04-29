@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { Modal as AntdModal } from 'antd';
 
+export const BackContainer = styled.div``;
+
 export const Modal = styled(AntdModal)`
     .ant-modal-footer {
         padding: 0 1.5rem 1rem;
@@ -12,7 +14,7 @@ export const Modal = styled(AntdModal)`
 
     }
     label, input, .ant-select-selector, .ant-select-arrow {
-        color: ${({ theme }) => theme.secondary};
+        color: ${({ theme }) => theme.font};
     }
 
     input, select, .ant-select:not(.ant-select-customize-input) .ant-select-selector {
@@ -24,18 +26,19 @@ export const Modal = styled(AntdModal)`
     .ant-modal-title,
     .ant-modal-footer {
         background: ${({ theme }) => theme.primary};
-        color: ${({ theme }) => theme.secondary};
+        color: ${({ theme }) => theme.font};
         border: 0;
     }
 
     .ant-modal-footer {
         display: flex;
-        justify-content: space-between;
+        gap: 1rem;
+        justify-content: end;
     }
 `;
 
-export const Delete = styled.p`
-    color: ${({ theme }) => theme.red};
+export const Cancel = styled.p`
+    color: ${({ theme }) => theme.font};
     cursor: pointer;
     transition: 0.2s;
 
@@ -47,8 +50,5 @@ export const Submit = styled.p`
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;
-
-    &:hover {
-        opacity: 0.8;
-    }
-`;
+    color: $BackContainer
+    `;
