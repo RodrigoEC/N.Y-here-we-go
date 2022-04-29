@@ -32,3 +32,18 @@ export const Logout = styled.span`
     font-weight: bold;
     cursor: pointer;
 `;
+
+export const LoadingContainer = styled.div`
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+`;
+
+export const LoadingText = styled.p`
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+`;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     align-items: center;
-    flex-grow: 11;
 
     @keyframes opacity {
         0% {

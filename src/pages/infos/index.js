@@ -6,8 +6,8 @@ import { LogoMini } from '../../components/icons/LogoMini';
 import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
 import { getDolar } from '../../services/dolar';
-import { createPage, getListDatabase, removePage, updatePage } from '../../services/notion';
-import { Devider, InfoContainer, Wrapper, Logout } from './style';
+import { getListDatabase, updatePage } from '../../services/notion';
+import { Devider, InfoContainer, Wrapper, LoadingText, LoadingContainer, Logout } from './style';
 
 export const Info = () => {
     const [NYTaxes,] = useState(8.88);
@@ -121,10 +121,7 @@ export const Info = () => {
         formatElementsList(listElementsRaw);
 
         const response = updatePage(pageId, { 'Check': { checkbox: checkValue } });
-        response.then((response) =>
-            response ?
-                formatElementsList(oldListElement) :
-                '');
+        response.then((response) => !response && formatElementsList(oldListElement));
     };
 
     return (
@@ -136,7 +133,10 @@ export const Info = () => {
                 <TabledInfo title='taxa N.Y' info={NYTaxes} />
             </InfoContainer>
             {loading ? (
-                <Loading />
+                <LoadingContainer>
+                    <Loading />
+                    <LoadingText>Carregando dados...</LoadingText>
+                </LoadingContainer>
             ) : (
                 <NotionData
                     loadData={getListData}
