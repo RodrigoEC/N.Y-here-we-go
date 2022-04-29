@@ -153,7 +153,7 @@ export const Info = () => {
                 <Contribute />
                 <Logout onClick={handleLogout} >Sair</Logout>
             </Wrapper>
-            <ModalBoughts active={true} />
+            <ModalBoughts active={false} />
         </>
     )
 }
