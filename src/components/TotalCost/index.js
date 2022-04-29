@@ -1,8 +1,10 @@
 import React from 'react';
+import { useContent } from '../../context/elements';
 import { Notion } from '../icons/Notion';
 import { Wrapper, TotalValue, Subtitle, SubtitleContainer } from './style';
 
-export const TotalCost = ({ finalPrice, paidAmount }) => {
+export const TotalCost = () => {
+    const { finalPrice, paidAmount } = useContent();
     const porcent = paidAmount / finalPrice * 100
 
     return (

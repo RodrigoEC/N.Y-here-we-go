@@ -2,7 +2,7 @@ import React from 'react';
 import { ListElement } from '../ListElement';
 import { Wrapper, Title, InfoContainer } from './style';
 
-export const ListElements = ({ title, elements, onCheck }) => {
+export const ListElements = ({ title, elements }) => {
     return (elements &&
         <Wrapper>
             <Title>{title}</Title>
