@@ -3,9 +3,10 @@ import { ProgressBar } from '../ProgressBar';
 import { TotalCost } from '../TotalCost';
 import { ListElements } from '../../components/ListElements';
 import { Reload } from '../icons/Reload';
-import { Wrapper, ListsContainer, FailedWrapper, Title } from './style';
+import { Wrapper, ListsContainer, FailedWrapper, Title, Menu } from './style';
 import { Cross } from '../icons/Cross';
 import { useContent } from '../../context/elements';
+import { ReloadMini } from '../icons/ReloadMini';
 
 export const NotionData = () => {
     const {
@@ -14,6 +15,7 @@ export const NotionData = () => {
         failed, finalPrice,
         paidAmount,
         listElements: elements,
+        getListData,
     } = useContent();
     const handleModal = () => setActiveModal(previous => !previous);
 
@@ -31,9 +33,10 @@ export const NotionData = () => {
         : (
             <Wrapper>
                 <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
-                <div id='add-cross' onClick={handleModal}>
-                    <Cross />
-                </div>
+                <Menu>
+                    <ReloadMini id='reload' onClick={getListData} />
+                    <Cross id='add-cross' onClick={handleModal} />
+                </Menu>
                 <ListsContainer>
                     {
                         Object.keys(elements).map((elementCategory) => {
@@ -45,7 +48,7 @@ export const NotionData = () => {
                         })
                     }
                 </ ListsContainer>
-                <TotalCost finalPrice={finalPrice} paidAmount={paidAmount} />
+                <TotalCost />
             </Wrapper>
         )
 }

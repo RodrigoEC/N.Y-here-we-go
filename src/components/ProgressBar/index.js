@@ -1,8 +1,11 @@
 import React from 'react';
+import { useContent } from '../../context/elements';
 import { Plane } from '../icons/Plane';
 import { Container, Wrapper, Progress, ProgressNumber } from './style';
 
-export const ProgressBar = ({ finalPrice, paidAmount }) => {
+export const ProgressBar = () => {
+    const { finalPrice, paidAmount } = useContent();
+
     const porcentage = (paidAmount / finalPrice * 100).toFixed(0);
 
     return (
@@ -13,11 +16,5 @@ export const ProgressBar = ({ finalPrice, paidAmount }) => {
             </Container>
             <ProgressNumber>{porcentage}%</ProgressNumber>
         </Wrapper>
-    )
-}
-
-ProgressBar.defaultProps = {
-    finalPrice: 1,
-    paidAmount: 1,
-}
-
+    );
+};

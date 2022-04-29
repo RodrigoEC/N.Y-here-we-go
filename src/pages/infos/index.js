@@ -64,7 +64,7 @@ export const Info = () => {
                     <NotionData />
                 )}
                 <Contribute />
-                <Logout onClick={handleLogout} >Sair</Logout>
+                <Logout onClick={handleLogout}>Sair</Logout>
             </Wrapper>
             {
                 activeModal && (

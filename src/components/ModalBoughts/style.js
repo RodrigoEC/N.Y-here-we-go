@@ -51,4 +51,4 @@ export const Submit = styled.p`
     cursor: pointer;
     transition: 0.2s;
     color: $BackContainer
-    `;
+`;
