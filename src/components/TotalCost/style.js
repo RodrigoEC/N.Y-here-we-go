@@ -7,6 +7,15 @@ export const Wrapper = styled.div`
     gap: .75rem;
     flex-grow: 1;
     justify-content: end;
+
+    & a {
+        transition: 0.3s;
+    }
+
+    & a:hover {
+        transform: scale(1.05);
+        opacity: 0.25;
+    }
 `;
 
 export const Subtitle = styled.p`

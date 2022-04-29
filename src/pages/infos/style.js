@@ -31,6 +31,12 @@ export const Logout = styled.span`
     margin-top: 1rem;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+        opacity: 0.25;
+    }
 `;
 
 export const LoadingContainer = styled.div`

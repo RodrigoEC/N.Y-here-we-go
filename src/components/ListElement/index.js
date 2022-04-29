@@ -16,7 +16,7 @@ export const ListElement = ({ pageId, element, onCheck }) => {
 
     return (
         <Wrapper>
-            <Checked checked={element.Check.checkbox} onClick={handleCheck}/>
+            <Checked id='checkbox' checked={element.Check.checkbox} onClick={handleCheck}/>
             <DescriptionContainer>
                 <Description checked={element.Check.checkbox}>{description}</Description>
                 <Price checked={element.Check.checkbox}>{coinRepresentative}{formatedPrice}</Price>

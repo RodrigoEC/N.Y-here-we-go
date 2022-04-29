@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Contribute } from '../../components/Contribute';
+import { Cross } from '../../components/icons/Cross';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
 import { NotionData } from '../../components/NotionData';

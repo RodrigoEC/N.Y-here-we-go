@@ -5,13 +5,13 @@ export const Wrapper = styled.div`
     width: 100%;
     align-items: center;
     margin-top: 2rem;
-    padding: 0 2rem;
     box-sizing: border-box;
     gap: 1rem;
 
     @media (max-width: 550px) {
         gap: 0.5rem;
     }
+
 `;
 
 export const Container = styled.div`
@@ -23,6 +23,11 @@ export const Container = styled.div`
     background: linear-gradient(90.12deg, ${({ theme }) => theme.red} -22.25%, ${({ theme }) => theme.blue} 105.36%);
     box-sizing: border-box;
     flex-grow: 1;
+    transition: 0.2s;
+
+    &:hover {
+        transform: scale(1.01);
+    }
 
 `;
 

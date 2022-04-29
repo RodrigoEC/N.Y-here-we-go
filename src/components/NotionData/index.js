@@ -4,6 +4,7 @@ import { TotalCost } from '../TotalCost';
 import { ListElements } from '../../components/ListElements';
 import { Reload } from '../icons/Reload';
 import { Wrapper, ListsContainer, FailedWrapper, Title } from './style';
+import { Cross } from '../icons/Cross';
 
 export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements, handleCheckElement }) => {
 
@@ -21,6 +22,7 @@ export const NotionData = ({ loadData, failed, finalPrice, paidAmount, elements,
         : (
             <Wrapper>
                 <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
+                <Cross id='add-cross'/>
                 <ListsContainer>
                     {
                         Object.keys(elements).map((elementCategory) => {

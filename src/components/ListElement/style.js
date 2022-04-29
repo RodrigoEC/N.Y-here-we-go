@@ -6,6 +6,15 @@ export const Wrapper = styled.div`
     color: #505050;
     gap: .75rem;
     margin-left: .5rem;
+
+    & #checkbox {
+        transition: 0.3s;
+    }
+    
+    & #checkbox:hover {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
 `;
 
 export const Description = styled.p`

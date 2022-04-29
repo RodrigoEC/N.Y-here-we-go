@@ -1,14 +1,27 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-    
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    & #add-cross {
+        align-self: end;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    & #add-cross:hover {
+        transform: scale(1.05);
+        opacity: 0.25;
+    }
 `;
 
 export const ListsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 2rem 4rem;
-    padding: 3rem 2rem;
     margin: 0 auto;
 `;
 
