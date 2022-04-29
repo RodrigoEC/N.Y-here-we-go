@@ -28,6 +28,10 @@ time, mark, audio, video {
     color: ${({ theme }) => theme.secondary};
 	transition: 0.3s background, fill;
 }
+
+html .ant-select-dropdown-empty, .ant-select-dropdown {
+	background: ${({ theme }) => theme.primary};
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {

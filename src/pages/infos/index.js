@@ -4,6 +4,7 @@ import { Contribute } from '../../components/Contribute';
 import { Cross } from '../../components/icons/Cross';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
+import { ModalBoughts } from '../../components/ModalBoughts';
 import { NotionData } from '../../components/NotionData';
 import { TabledInfo } from '../../components/TabledInfo';
 import { getDolar } from '../../services/dolar';
@@ -126,30 +127,33 @@ export const Info = () => {
     };
 
     return (
-        <Wrapper>
-            <LogoMini />
-            <Devider />
-            <InfoContainer>
-                <TabledInfo title='dolar hoje' info={dolar} />
-                <TabledInfo title='taxa N.Y' info={NYTaxes} />
-            </InfoContainer>
-            {loading ? (
-                <LoadingContainer>
-                    <Loading />
-                    <LoadingText>Carregando dados...</LoadingText>
-                </LoadingContainer>
-            ) : (
-                <NotionData
-                    loadData={getListData}
-                    failed={failed}
-                    finalPrice={finalPrice}
-                    paidAmount={paidAmount}
-                    elements={listElements}
-                    handleCheckElement={handleCheckElement}
-                />
-            )}
-            <Contribute />
-            <Logout onClick={handleLogout} >Sair</Logout>
-        </Wrapper>
+        <>
+            <Wrapper>
+                <LogoMini />
+                <Devider />
+                <InfoContainer>
+                    <TabledInfo title='dolar hoje' info={dolar} />
+                    <TabledInfo title='taxa N.Y' info={NYTaxes} />
+                </InfoContainer>
+                {loading ? (
+                    <LoadingContainer>
+                        <Loading />
+                        <LoadingText>Carregando dados...</LoadingText>
+                    </LoadingContainer>
+                ) : (
+                    <NotionData
+                        loadData={getListData}
+                        failed={failed}
+                        finalPrice={finalPrice}
+                        paidAmount={paidAmount}
+                        elements={listElements}
+                        handleCheckElement={handleCheckElement}
+                    />
+                )}
+                <Contribute />
+                <Logout onClick={handleLogout} >Sair</Logout>
+            </Wrapper>
+            <ModalBoughts active={true} />
+        </>
     )
 }
