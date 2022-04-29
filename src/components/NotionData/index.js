@@ -5,9 +5,16 @@ import { ListElements } from '../../components/ListElements';
 import { Reload } from '../icons/Reload';
 import { Wrapper, ListsContainer, FailedWrapper, Title } from './style';
 import { Cross } from '../icons/Cross';
+import { useContent } from '../../context/elements';
 
-export const NotionData = ({ setActiveModal, loadData, failed, finalPrice, paidAmount, elements, handleCheckElement }) => {
-
+export const NotionData = () => {
+    const {
+        setActiveModal,
+        getListData: loadData,
+        failed, finalPrice,
+        paidAmount,
+        listElements: elements,
+    } = useContent();
     const handleModal = () => setActiveModal(previous => !previous);
 
     return failed ?
@@ -24,14 +31,13 @@ export const NotionData = ({ setActiveModal, loadData, failed, finalPrice, paidA
         : (
             <Wrapper>
                 <ProgressBar finalPrice={finalPrice} paidAmount={paidAmount} />
-                <div onClick={handleModal}>
-                    <Cross id='add-cross' />
+                <div id='add-cross' onClick={handleModal}>
+                    <Cross />
                 </div>
                 <ListsContainer>
                     {
                         Object.keys(elements).map((elementCategory) => {
                             return <ListElements
-                                onCheck={handleCheckElement}
                                 key={elementCategory}
                                 title={elementCategory}
                                 elements={elements[elementCategory]}

@@ -21,13 +21,7 @@ export const Info = () => {
         dolar, 
         NYTaxes,
         loading,
-        getListData,
-        setActiveModal,
         activeModal,
-        failed,
-        finalPrice,
-        paidAmount,
-        listElements,
     } = useContent();
 
     const location = useLocation();
@@ -67,15 +61,7 @@ export const Info = () => {
                         <LoadingText>Carregando dados...</LoadingText>
                     </LoadingContainer>
                 ) : (
-                    <NotionData
-                        loadData={getListData}
-                        setActiveModal={setActiveModal}
-                        activeModal={activeModal}
-                        failed={failed}
-                        finalPrice={finalPrice}
-                        paidAmount={paidAmount}
-                        elements={listElements}
-                    />
+                    <NotionData />
                 )}
                 <Contribute />
                 <Logout onClick={handleLogout} >Sair</Logout>
