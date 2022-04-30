@@ -97,6 +97,16 @@ export const Submit = styled.button`
     &:hover {
         opacity: 0.7;
     }
+
+    &.disabled {
+        opacity: 0.4;
+    }
+
+    &.disabled:hover {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
 `;
 
 export const Reloading = styled(ReloadMini)`

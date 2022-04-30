@@ -8,6 +8,7 @@ import { Modal, Cancel, Submit, BackContainer, Footer, Title, Header, Reloading,
 
 export const ModalBoughts = () => {
     const [finishingLoad, setFinishingLoad] = useState(false);
+    const [formOk, setFormOk] = useState(false);
     const {
         setActiveModal,
         schema,
@@ -21,6 +22,8 @@ export const ModalBoughts = () => {
 
 
     const handleCreate = async () => {
+        if (!formOk) return;
+
         const formObject = form.getFieldsValue('Compra')
         const elementTitle = currentModalElement.properties ? currentModalElement.properties['Compra'].title : null;
         const properties = {
@@ -66,6 +69,15 @@ export const ModalBoughts = () => {
         });
     };
 
+    const handleFieldsChange = (_, allFields) => {
+        setFormOk(
+            Object.values(allFields).every((val) =>
+             val.value !== undefined &&
+             val.value !== ''
+            )
+        );
+    }
+
     return (
         <BackContainer onClick={() => setActiveModal(false)}>
             <Modal onClick={(e) => e.stopPropagation()}>
@@ -82,6 +94,7 @@ export const ModalBoughts = () => {
                 <Form
                     layout="vertical"
                     form={form}
+                    onFieldsChange={handleFieldsChange}
                     initialValues={Object.keys(currentModalElement).length > 0 && {
                         'Compra': currentModalElement.properties['Compra'].title[0].text.content,
                         'Preço': currentModalElement.properties['Preço'].number,
@@ -138,6 +151,7 @@ export const ModalBoughts = () => {
                                 <Submit
                                     type='submit'
                                     onClick={handleCreate}
+                                    className={!formOk  && 'disabled'}
                                 >
                                     Finalizar
                                 </Submit>
