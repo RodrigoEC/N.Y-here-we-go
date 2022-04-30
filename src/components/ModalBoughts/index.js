@@ -77,7 +77,7 @@ export const ModalBoughts = () => {
                 return (
                     field.value !== undefined &&
                     field.value !== '' &&
-                    field.value !== currentElementProps[field.name[0]].toString()
+                    field.value.toString() !== currentElementProps[field.name[0]].toString()
                 );
             });
         };
