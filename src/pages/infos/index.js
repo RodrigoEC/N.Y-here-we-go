@@ -1,27 +1,35 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Contribute } from '../../components/Contribute';
+import { Cross } from '../../components/icons/Cross';
 import { Loading } from '../../components/icons/Loading';
 import { LogoMini } from '../../components/icons/LogoMini';
+import { ReloadMini } from '../../components/icons/ReloadMini';
 import { ModalBoughts } from '../../components/ModalBoughts';
 import { NotionData } from '../../components/NotionData';
+import { ProgressBar } from '../../components/ProgressBar';
 import { TabledInfo } from '../../components/TabledInfo';
+import { TotalCost } from '../../components/TotalCost';
 import { useContent } from '../../context/elements';
-import { 
-    Devider, 
-    InfoContainer, 
-    Wrapper, 
+import {
+    Devider,
+    InfoContainer,
+    Wrapper,
     LoadingText,
-     LoadingContainer,
-     Logout 
-    } from './style';
+    LoadingContainer,
+    Logout,
+    Menu,
+    ContentWrapper,
+} from './style';
 
 export const Info = () => {
-    const { 
-        dolar, 
+    const {
+        dolar,
         NYTaxes,
         loading,
         activeModal,
+        setActiveModal,
+        getListData,
     } = useContent();
 
     const location = useLocation();
@@ -55,14 +63,23 @@ export const Info = () => {
                     <TabledInfo title='dolar hoje' info={dolar} />
                     <TabledInfo title='taxa N.Y' info={NYTaxes} />
                 </InfoContainer>
-                {loading ? (
-                    <LoadingContainer>
-                        <Loading />
-                        <LoadingText>Carregando dados...</LoadingText>
-                    </LoadingContainer>
-                ) : (
-                    <NotionData />
-                )}
+                <ContentWrapper>
+                    <ProgressBar />
+                    <Menu>
+                        <ReloadMini id='reload' onClick={getListData} />
+                        <Cross id='add-cross' onClick={() => setActiveModal(previous => !previous)} />
+                    </Menu>
+
+                    {loading ? (
+                        <LoadingContainer>
+                            <Loading />
+                            <LoadingText>Carregando dados...</LoadingText>
+                        </LoadingContainer>
+                    ) : (
+                        <NotionData />
+                    )}
+                    <TotalCost />
+                </ContentWrapper>
                 <Contribute />
                 <Logout onClick={handleLogout}>Sair</Logout>
             </Wrapper>

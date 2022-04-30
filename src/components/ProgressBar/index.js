@@ -6,7 +6,7 @@ import { Container, Wrapper, Progress, ProgressNumber } from './style';
 export const ProgressBar = () => {
     const { finalPrice, paidAmount } = useContent();
 
-    const porcentage = (paidAmount / finalPrice * 100).toFixed(0);
+    const porcentage = ((paidAmount || 0) / (finalPrice || 100) * 100).toFixed(0);
 
     return (
         <Wrapper>
