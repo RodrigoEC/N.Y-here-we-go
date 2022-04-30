@@ -154,13 +154,13 @@ export const ModalBoughts = () => {
                     <Footer>
                         {
                             currentModalElement &&
-                            <Delete onClick={handleDelete} >
+                            <Delete >
                                 {
                                     deleting ? (<>
                                         <Reloading />
                                         <p>Deletando..</p>
                                     </>) :
-                                    <p>Excluir</p>
+                                    <p onClick={handleDelete}>Excluir</p>
                                 }
                             </Delete>
                         }

@@ -81,16 +81,15 @@ export const Delete = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    cursor: pointer;
     transition: 0.2s;
     flex-grow: 1;
-
+    
     p {
-
+        cursor: pointer;
         color: ${({ theme }) => theme.red};
     }
 
-    &:hover {
+    & p:hover {
         opacity: 0.7;
     }
 `;
