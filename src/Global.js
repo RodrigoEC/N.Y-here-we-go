@@ -29,7 +29,8 @@ time, mark, audio, video {
 	transition: 0.3s background, fill;
 }
 
-.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+.ant-select-item-option-active:not(.ant-select-item-option-disabled),
+.ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
 	background-color: ${({ theme }) => theme.third};
 }
 

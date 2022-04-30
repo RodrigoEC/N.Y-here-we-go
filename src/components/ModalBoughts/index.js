@@ -2,13 +2,19 @@ import { Col, Form, Input, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import { useContent } from '../../context/elements';
 import { useTheme } from '../../context/theme';
-import { createPage } from '../../services/notion';
+import { createPage, updatePage } from '../../services/notion';
 import { Close } from '../icons/Close';
 import { Modal, Cancel, Submit, BackContainer, Footer, Title, Header, Reloading, SubmitContainer, Icon, TitleContainer } from './style';
 
 export const ModalBoughts = () => {
     const [finishingLoad, setFinishingLoad] = useState(false);
-    const { setActiveModal, schema, getListData } = useContent();
+    const {
+        setActiveModal,
+        schema,
+        getListData,
+        handleModalElement,
+        currentModalElement
+    } = useContent();
     const [form] = Form.useForm();
     const { Option } = Select;
     const { theme } = useTheme();
@@ -16,37 +22,49 @@ export const ModalBoughts = () => {
 
     const handleCreate = async () => {
         const formObject = form.getFieldsValue('Compra')
+        const elementTitle = currentModalElement.properties ? currentModalElement.properties['Compra'].title : null;
         const properties = {
-            'Moeda': {
-                select: {
-                    name: formObject.Moeda
-                }
-            },
-            'Categoria': {
-                select: {
-                    name: formObject.Categoria
-                }
-            },
             'Compra': {
                 title: [
                     {
+                        'type': 'text',
                         'text': {
-                            content: formObject.Compra
+                            'content': formObject.Compra || (elementTitle ? elementTitle[0].text.content : 'missing title')
                         }
                     }
                 ]
             },
             'Preço': {
-                'number': Number(formObject['Preço']),
+                'number': Number(formObject['Preço']) || currentModalElement.properties['Preço'].number,
+            },
+            'Moeda': {
+                select: {
+                    name: formObject.Moeda || currentModalElement.properties['Moeda'].select.name
+                }
+            },
+            'Categoria': {
+                select: {
+                    name: formObject.Categoria || currentModalElement.properties['Categoria'].select.name
+                }
+            },
+            'Check': {
+                'checkbox': Object.keys(currentModalElement).length > 0 ?
+                    currentModalElement.properties['Check'].checkbox :
+                    false,
             }
         }
-        const creatingPromise = createPage(properties);
+
+        const creatingPromise = Object.keys(currentModalElement).length > 0 ?
+            updatePage(currentModalElement.id, properties) :
+            createPage(properties);
         setFinishingLoad(true);
         creatingPromise.then(() => {
-            setActiveModal(false);
+            setFinishingLoad(false);
             getListData();
+            handleModalElement();
+            setActiveModal(false);
         });
-    }
+    };
 
     return (
         <BackContainer onClick={() => setActiveModal(false)}>
@@ -61,7 +79,15 @@ export const ModalBoughts = () => {
                         onClick={() => setActiveModal(false)}
                     />
                 </Header>
-                <Form layout="vertical" form={form}>
+                <Form
+                    layout="vertical"
+                    form={form}
+                    initialValues={Object.keys(currentModalElement).length > 0 && {
+                        'Compra': currentModalElement.properties['Compra'].title[0].text.content,
+                        'Preço': currentModalElement.properties['Preço'].number,
+                        'Moeda': currentModalElement.properties['Moeda'].select.name,
+                        'Categoria': currentModalElement.properties['Categoria'].select.name,
+                    }}>
                     <Row gutter={24}>
                         <Col span={16}>
 
@@ -70,7 +96,7 @@ export const ModalBoughts = () => {
                             </Form.Item>
                         </Col>
                         <Col span={8}>
-                        <Form.Item label='Preço' name='Preço'>
+                            <Form.Item label='Preço' name='Preço'>
                                 <Input type='number' />
                             </Form.Item>
                         </Col>

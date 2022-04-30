@@ -20,6 +20,7 @@ export const Wrapper = styled.div`
 export const Description = styled.p`
     letter-spacing: 2px;
     font-size: 14px;
+    line-height: 1.25;
 
     strong {
         font-weight: ${({ checked }) => checked ? '' : 'bold'};;
@@ -50,4 +51,18 @@ export const Price = styled.p`
         }
     }
 
+`;
+
+export const PriceContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    #edit {
+        transition: 0.3s;
+    }
+
+    #edit:hover {
+        opacity: 0.3;
+    }
 `;

@@ -17,6 +17,7 @@ export default function ContentProvider({ children }) {
     const [paidAmount, setPaidAmount] = useState(0);
     const [activeModal, setActiveModal] = useState(false);
     const [schema, setSchema] = useState({});
+    const [currentModalElement, setCurrentModalElement] = useState({});
 
     const formatElementsList = (listData) => {
         const listObject = {};
@@ -31,6 +32,11 @@ export default function ContentProvider({ children }) {
 
         setListElementsRaw(listData);
         setListElements(listObject);
+    }
+
+    const handleModalElement = (element) => {
+        setCurrentModalElement(element ? element : {});
+        setActiveModal(true);
     }
 
     const getListData = async () => {
@@ -69,6 +75,9 @@ export default function ContentProvider({ children }) {
         setActiveModal,
         schema,
         setSchema,
+        currentModalElement,
+        setCurrentModalElement,
+        handleModalElement
     }
 
 

@@ -60,6 +60,7 @@ export const updatePage = async (pageId, properties) => {
         // })
         return response;
     } catch (e) {
+        console.log(e)
         console.log('Erro ao fazer o update da página de ID:', pageId);
         return null;
     }

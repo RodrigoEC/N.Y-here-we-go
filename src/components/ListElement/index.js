@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { useContent } from '../../context/elements';
 import { updatePage } from '../../services/notion';
 import { Checked } from '../icons/Checked';
-import { Wrapper, Description, DescriptionContainer, Price } from './style';
+import { Edit } from '../icons/Edit';
+import { Wrapper, Description, DescriptionContainer, Price, PriceContainer } from './style';
 
 export const ListElement = ({ element }) => {
     const [checked, setChecked] = useState(element.properties['Check'].checkbox);
-    const { listElementsRaw, formatElementsList } = useContent();
-    
+    const { listElementsRaw, formatElementsList, handleModalElement } = useContent();
+
     const title = element.properties['Compra'].title;
     const description = title.length > 0 ? title[0].text.content : 'missing title';
 
@@ -27,9 +28,12 @@ export const ListElement = ({ element }) => {
 
     return (
         <Wrapper>
-            <Checked id='checkbox' checked={checked} onClick={handleCheck}/>
+            <Checked id='checkbox' checked={checked} onClick={handleCheck} />
             <DescriptionContainer>
-                <Description checked={checked}>{description}</Description>
+                <PriceContainer>
+                    <Edit id='edit' onClick={() => handleModalElement(element)}/>
+                    <Description checked={checked}>{description}</Description>
+                </PriceContainer>
                 <Price checked={checked}>{coinRepresentative}{formatedPrice}</Price>
             </DescriptionContainer>
         </Wrapper>
