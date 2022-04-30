@@ -26,7 +26,7 @@ export const ModalBoughts = () => {
         if (!formOk) return;
 
         const formObject = form.getFieldsValue('Compra')
-        const elementTitle = currentModalElement.properties ? currentModalElement.properties['Compra'].title : null;
+        const elementTitle = currentModalElement ? currentModalElement.properties['Compra'].title : null;
         const properties = {
             'Compra': {
                 title: [
