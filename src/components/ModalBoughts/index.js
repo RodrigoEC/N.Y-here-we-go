@@ -2,12 +2,13 @@ import { Col, Form, Input, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import { useContent } from '../../context/elements';
 import { useTheme } from '../../context/theme';
-import { createPage, updatePage } from '../../services/notion';
+import { createPage, removePage, updatePage } from '../../services/notion';
 import { Close } from '../icons/Close';
-import { Modal, Cancel, Submit, BackContainer, Footer, Title, Header, Reloading, SubmitContainer, Icon, TitleContainer } from './style';
+import { Modal, Cancel, Submit, BackContainer, Footer, Title, Header, Reloading, SubmitContainer, Icon, TitleContainer, Delete } from './style';
 
 export const ModalBoughts = () => {
     const [finishingLoad, setFinishingLoad] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     const [formOk, setFormOk] = useState(false);
     const {
         setActiveModal,
@@ -51,13 +52,13 @@ export const ModalBoughts = () => {
                 }
             },
             'Check': {
-                'checkbox': Object.keys(currentModalElement).length > 0 ?
+                'checkbox': currentModalElement ?
                     currentModalElement.properties['Check'].checkbox :
                     false,
             }
         }
 
-        const creatingPromise = Object.keys(currentModalElement).length > 0 ?
+        const creatingPromise = currentModalElement ?
             updatePage(currentModalElement.id, properties) :
             createPage(properties);
         setFinishingLoad(true);
@@ -72,14 +73,28 @@ export const ModalBoughts = () => {
     const handleFieldsChange = (_, allFields) => {
         setFormOk(
             Object.values(allFields).every((val) =>
-             val.value !== undefined &&
-             val.value !== ''
+                val.value !== undefined &&
+                val.value !== ''
             )
         );
     }
 
+    const handleClose = () => {
+        setActiveModal(false);
+        handleModalElement();
+    }
+
+    const handleDelete = async () => {
+        setDeleting(true);
+        await removePage(currentModalElement.id);
+        setDeleting(false);
+        setActiveModal(false);
+        getListData();
+        handleModalElement();
+    }
+
     return (
-        <BackContainer onClick={() => setActiveModal(false)}>
+        <BackContainer onClick={handleClose}>
             <Modal onClick={(e) => e.stopPropagation()}>
                 <Header>
                     <TitleContainer>
@@ -88,14 +103,14 @@ export const ModalBoughts = () => {
                     </TitleContainer>
                     <Close
                         id='close-tab'
-                        onClick={() => setActiveModal(false)}
+                        onClick={handleClose}
                     />
                 </Header>
                 <Form
                     layout="vertical"
                     form={form}
                     onFieldsChange={handleFieldsChange}
-                    initialValues={Object.keys(currentModalElement).length > 0 && {
+                    initialValues={currentModalElement && {
                         'Compra': currentModalElement.properties['Compra'].title[0].text.content,
                         'Preço': currentModalElement.properties['Preço'].number,
                         'Moeda': currentModalElement.properties['Moeda'].select.name,
@@ -137,8 +152,20 @@ export const ModalBoughts = () => {
                     </Row>
 
                     <Footer>
+                        {
+                            currentModalElement &&
+                            <Delete onClick={handleDelete} >
+                                {
+                                    deleting ? (<>
+                                        <Reloading />
+                                        <p>Deletando..</p>
+                                    </>) :
+                                    <p>Excluir</p>
+                                }
+                            </Delete>
+                        }
                         <Cancel
-                            onClick={() => setActiveModal(false)}
+                            onClick={handleClose}
                         >
                             Cancelar
                         </Cancel>
@@ -151,7 +178,7 @@ export const ModalBoughts = () => {
                                 <Submit
                                     type='submit'
                                     onClick={handleCreate}
-                                    className={!formOk  && 'disabled'}
+                                    className={!formOk && 'disabled'}
                                 >
                                     Finalizar
                                 </Submit>
