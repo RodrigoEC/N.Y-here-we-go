@@ -23,6 +23,19 @@ export const getListDatabase = async (repeated) => {
     }
 }
 
+export const getDatabaseSchema = async (repeated) => {
+    try {
+        const response = await notion.databases.retrieve({
+            database_id: process.env.REACT_APP_NOTION_DATABASE_ID,
+        })
+        return response;
+    } catch (e) {
+        console.log('Erro ao recuperar infos...');
+        if (!repeated) getDatabaseSchema(true);
+        return null;
+    }
+}
+
 export const updatePage = async (pageId, properties) => {
     try {
         const response = await notionAxios.patch(

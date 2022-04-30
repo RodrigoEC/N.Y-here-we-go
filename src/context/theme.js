@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 
 const colors = {
     black: '#282E31',
+    darkerBlack: '#373F44',
     white: '#FDFDFD',
     fontBlack: '#505050',
     fontWhite: '#E2E2E2',
@@ -22,6 +23,7 @@ const ThemeContext = createContext()
 const themeLight= {
     primary: colors.white,
     secondary: colors.black,
+    third: colors.darkerWhite,
     red: colors.red,
     blue: colors.blue,
     purple: colors.purple,
@@ -32,6 +34,7 @@ const themeLight= {
 const themeDark = {
     primary: colors.black,
     secondary: colors.white,
+    third: colors.darkerBlack,
     red: colors.lightRed,
     blue: colors.lightBlue,
     font: colors.fontWhite,

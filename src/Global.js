@@ -29,6 +29,10 @@ time, mark, audio, video {
 	transition: 0.3s background, fill;
 }
 
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+	background-color: ${({ theme }) => theme.third};
+}
+
 html .ant-select-dropdown-empty, .ant-select-dropdown {
 	background: ${({ theme }) => theme.primary};
 }

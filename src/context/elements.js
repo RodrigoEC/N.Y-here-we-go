@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { getDolar } from '../services/dolar';
-import { getListDatabase } from '../services/notion';
+import { getDatabaseSchema, getListDatabase } from '../services/notion';
 
 
 
@@ -15,7 +15,8 @@ export default function ContentProvider({ children }) {
     const [listElements, setListElements] = useState({});
     const [finalPrice, setFinalPrice] = useState(0);
     const [paidAmount, setPaidAmount] = useState(0);
-    const [activeModal, setActiveModal] = useState(true);
+    const [activeModal, setActiveModal] = useState(false);
+    const [schema, setSchema] = useState({});
 
     const formatElementsList = (listData) => {
         const listObject = {};
@@ -66,6 +67,8 @@ export default function ContentProvider({ children }) {
         getListData,
         activeModal,
         setActiveModal,
+        schema,
+        setSchema,
     }
 
 
@@ -75,6 +78,13 @@ export default function ContentProvider({ children }) {
             setDolar(dolarJson.USDBRLT.ask);
         }
 
+        const getSchema = async () => {
+            const schema = await getDatabaseSchema();
+            setSchema(schema.properties);
+        }
+
+
+        getSchema();
         getListData();
         getDolarData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
