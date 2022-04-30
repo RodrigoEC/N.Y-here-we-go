@@ -1,5 +1,5 @@
 import { Col, Form, Input, Row, Select } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useContent } from '../../context/elements';
 import { useTheme } from '../../context/theme';
 import { createPage, removePage, updatePage } from '../../services/notion';
@@ -10,6 +10,7 @@ export const ModalBoughts = () => {
     const [finishingLoad, setFinishingLoad] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const [formOk, setFormOk] = useState(false);
+    const [currentElementProps, setCurrentElementProps] = useState(null);
     const {
         setActiveModal,
         schema,
@@ -71,12 +72,27 @@ export const ModalBoughts = () => {
     };
 
     const handleFieldsChange = (_, allFields) => {
-        setFormOk(
-            Object.values(allFields).every((val) =>
-                val.value !== undefined &&
-                val.value !== ''
-            )
-        );
+        const editChange = () => {
+            return allFields.some((field) => {
+                return (
+                    field.value !== undefined &&
+                    field.value !== '' &&
+                    field.value !== currentElementProps[field.name[0]].toString()
+                );
+            });
+        };
+
+        const newChange = () => {
+            return allFields.every((field) => {
+                return (
+                    field.value !== undefined &&
+                    field.value !== ''
+                );
+            });
+        }
+
+        const canFinish = currentElementProps ? editChange() : newChange();
+        setFormOk(canFinish);
     }
 
     const handleClose = () => {
@@ -92,6 +108,21 @@ export const ModalBoughts = () => {
         getListData();
         handleModalElement();
     }
+
+    useEffect(() => {
+        if (!currentModalElement) return;
+
+        const currentElement = currentModalElement.properties;
+
+        const object = {
+            'Compra': currentElement['Compra'].title[0].text.content,
+            'Categoria': currentElement['Categoria'].select.name,
+            'Moeda': currentElement['Moeda'].select.name,
+            'Preço': currentElement['Preço'].number,
+        }
+
+        setCurrentElementProps(object);
+    }, [currentModalElement]);
 
     return (
         <BackContainer onClick={handleClose}>
@@ -160,7 +191,7 @@ export const ModalBoughts = () => {
                                         <Reloading />
                                         <p>Deletando..</p>
                                     </>) :
-                                    <p onClick={handleDelete}>Excluir</p>
+                                        <p onClick={handleDelete}>Excluir</p>
                                 }
                             </Delete>
                         }
