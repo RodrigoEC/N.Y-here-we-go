@@ -46,6 +46,7 @@ export const LoadingContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    margin: 2rem 0;
 `;
 
 export const LoadingText = styled.p`
