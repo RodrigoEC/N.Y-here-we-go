@@ -4,12 +4,14 @@ import { Service } from "axios-middleware";
 
 const mid = new Service(axios);
 mid.register({
-  onRequest(config) {
+  async onRequest(config) {
     const user = localStorage.getItem("@NYHWG/login");
     const pass = localStorage.getItem("@NYHWG/pass");
     if (!user || !pass) {
       window.location = "/login";
     }
+
+    await setTimeout(() => console.log(config), 2000);
     return config;
   },
 });
