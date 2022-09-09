@@ -9,9 +9,9 @@ mid.register({
     const pass = localStorage.getItem("@NYHWG/pass");
     if (!user || !pass) {
       window.location = "/login";
+      return {};
     }
 
-    await setTimeout(() => console.log(config), 2000);
     return config;
   },
 });
