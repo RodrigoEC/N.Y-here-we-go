@@ -10,6 +10,7 @@ mid.register({
     if (!user || !pass) {
       window.location = "/login";
     }
+    return config;
   },
 });
 
