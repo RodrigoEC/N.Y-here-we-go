@@ -33,7 +33,7 @@ npm i
 4. Copy .env.example
 
 ```
-cp .env.example
+cp .env.example .env
 ```
 
 5. ⚠️ Now we're going to fill the environmet variables needed
